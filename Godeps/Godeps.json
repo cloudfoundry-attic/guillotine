@@ -1,0 +1,10 @@
+{
+	"ImportPath": "github.com/cloudfoundry-incubator/guillotine",
+	"GoVersion": "go1.3.1",
+	"Deps": [
+		{
+			"ImportPath": "github.com/cloudfoundry/mariadb_ctrl/os_helper",
+			"Rev": "2d2a8638c8549ea9924ad968a0dd4c01fc28ae7a"
+		}
+	]
+}
