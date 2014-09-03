@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"time"
 
 	"github.com/cloudfoundry-incubator/guillotine/inquisitor"
 	"github.com/cloudfoundry-incubator/guillotine/magistrate"
@@ -49,9 +50,12 @@ var mysqlPassword = flag.String(
 func main() {
 	flag.Parse()
 
-	iq := inquisitor.NewHttpInquisitor(*haproxyUser, *haproxyPassword, *haproxyIp)
-	h := headsman.NewMysqlHeadsman(os_helper.NewImpl(), *executablePath, *mysqlUser, *mysqlPassword, *haproxyIp)
-	me := magistrate.NewMagistrate(iq, h)
+	for {
+		iq := inquisitor.NewHttpInquisitor(*haproxyUser, *haproxyPassword, *haproxyIp)
+		h := headsman.NewMysqlHeadsman(os_helper.NewImpl(), *executablePath, *mysqlUser, *mysqlPassword, *haproxyIp)
+		me := magistrate.NewMagistrate(iq, h)
 
-	me.DeliberateAndExecute()
+		me.DeliberateAndExecute()
+		time.Sleep(.5)
+	}
 }
