@@ -70,6 +70,6 @@ func main() {
 		me := magistrate.NewMagistrate(iq, h)
 
 		me.DeliberateAndExecute()
-		time.Sleep(.5)
+		time.Sleep(500 * time.Millisecond)
 	}
 }
