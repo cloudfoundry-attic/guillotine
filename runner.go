@@ -15,13 +15,13 @@ import (
 )
 
 var haproxyUser = flag.String(
-	"mysqlUser",
+	"haproxyUser",
 	"root",
 	"Specifies the user name for MySQL",
 )
 
 var haproxyPassword = flag.String(
-	"mysqlPassword",
+	"haproxyPassword",
 	"",
 	"Specifies the password for connecting to MySQL",
 )
