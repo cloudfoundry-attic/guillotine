@@ -3,6 +3,9 @@ package main
 import (
 	"flag"
 	"time"
+	"os"
+	"strconv"
+	"io/ioutil"
 
 	"github.com/cloudfoundry-incubator/guillotine/inquisitor"
 	"github.com/cloudfoundry-incubator/guillotine/magistrate"
@@ -47,8 +50,19 @@ var mysqlPassword = flag.String(
 	"Specifies the password for connecting to MySQL",
 )
 
+var pidfile = flag.String(
+	"pidfile",
+	"",
+	"Specifies the location of the file to write the PID to",
+)
+
 func main() {
 	flag.Parse()
+
+	err := ioutil.WriteFile(*pidfile, []byte(strconv.Itoa(os.Getpid())), 0644)
+	if err != nil {
+		panic(err)
+	}
 
 	for {
 		iq := inquisitor.NewHttpInquisitor(*haproxyUser, *haproxyPassword, *haproxyIp)
